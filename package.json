@@ -1,0 +1,20 @@
+{
+  "name": "realtime-app",
+  "version": "1.0.0",
+  "description": "This is our realtime app",
+  "main": "index.js",
+  "scripts": {
+    "serve":"node server.js",
+    "dev": "nodemon server.js"
+     },
+  "author": "Ankur Kumar",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "express-ejs-layouts": "^2.5.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}
