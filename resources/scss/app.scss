@@ -1,6 +1,8 @@
 //here we not write to whole file name becuse it automatically 
 //understand that it is a partial file
 @import './variable';
+@import '~noty/src/noty.scss';
+@import '~noty/src/themes/mint.scss';
 
 body{
     font-family: 'Lato',sans-serif;
@@ -12,7 +14,7 @@ body{
 
 //our cart icon is in white color that so to appear them as visible 
 //we change our background color
-nav li:last-child a{
+nav li:last-child a {
     background: $primary;
     &:hover{
         background:$primary-hover;
@@ -44,6 +46,9 @@ section.hero {
         border-color:$pure;
         color:$pure;
     }
+    &:focus{//this is for when we click on button no other line should came
+        outline: none;
+    }
 }
 
 .btn-primary{
@@ -74,6 +79,11 @@ section.login{
             transition: $smooth;
         }
     }
+}
+
+.noty_theme__mint {
+    border-radius: 50px!important;
+    padding-left: 8px!important;
 }
 
 

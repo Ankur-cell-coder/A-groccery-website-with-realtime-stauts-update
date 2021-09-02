@@ -15,7 +15,7 @@ Git setup and first commit
 Install Laravel Mix
    -setup js and scss
 
-
+Install Tailwind css
 Create Home page using Html and css
   -include tailwind css
 
@@ -23,9 +23,28 @@ Create Cart page
     -order summary section
     -empty cart section
 
+move routes to routes files
+Create dedicated controllers
+
+Add to cart functionality
+  ftech all pizzas from db and show on home page
+  Create menu model and put dummy data
+  use connect-mongo for session store
+  connect to mongo db
+   -dependencies
+     -mongoose,express-session,connect-mongo,dotenv
+ -axios to send ajax request
+ -install notification library npm i noty
+
+ 
+
+
 Create Order controller and link it in server.js
 Create orders view with table for customer and admin
 Create Orders single page with status
 Create login page with route
+
+create register page with route
+Built register crud
 
 
