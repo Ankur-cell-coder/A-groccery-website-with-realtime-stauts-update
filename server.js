@@ -10,18 +10,19 @@ const app = express()
 const ejs = require('ejs')
 const path = require('path')
 
+const expressLayout = require('express-ejs-layouts')
+
+const PORT = process.env.PORT || 3000
+const mongoose = require('mongoose')
+
 //this session store all our cart information
 const session = require('express-session')
 //express-flash to store session in database
 const flash = require('express-flash')
 const MongoDbStore = require('connect-mongo')(session)
 
-const expressLayout = require('express-ejs-layouts')
-
-const PORT = process.env.PORT || 3000
-
-//connect mongse with server
-const mongoose = require('mongoose')
+//importing passport which use for login
+const passport = require('passport')
 
 //databse connection
 //everytime same code if used for databse connection
@@ -42,6 +43,7 @@ let mongoStore = new MongoDbStore({
     collection: 'sessions'//in which table value should be stored
 })
 
+
 //configuration for session
 //this session libaray work as a middleware
 //whole are explain in notes
@@ -55,17 +57,30 @@ app.use(session({
 
 
 
+//passport config
+const passportInit = require('./app/config/passport')
+passportInit(passport) //from here we pass passport which we install using npm to passport.js
+
+
+app.use(passport.initialize())
+app.use(passport.session())//passport work by using session method
+
+
+
+
+
 //express-flash use as a middleware
 app.use(flash())
 
 //Assets
 app.use(express.static('public'))
-
+app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
 //global middleware
-app.use((req,res,next) => {
+app.use((req, res, next) => {
     res.locals.session = req.session
+    res.locals.user = req.user//this is for if user login then not show login option
     next() //if we doesnt call next then it never pass to next and always executed
 })
 

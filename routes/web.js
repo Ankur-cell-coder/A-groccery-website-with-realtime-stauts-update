@@ -10,6 +10,7 @@ const homeController = require('../app/http/controllers/homeController')
 //here we exporting 
 const authController = require('../app/http/controllers/authController')
 const cartController = require('../app/http/controllers/customers/cartController')
+const guest = require('../app/http/middleware/guest') 
 
 
 function initRoutes(app){//now we can call app.()
@@ -21,8 +22,12 @@ function initRoutes(app){//now we can call app.()
     // in get method we got a request and response which is initialized
     //with homecontroller here and imported in homecontroller
     app.get('/',homeController().index)
-    app.get('/login',authController().login)
-    app.get('/register',authController().register)
+    app.get('/login',guest,authController().login)
+    app.post('/login',authController().postLogin)
+    app.get('/register',guest, authController().register)
+    app.post('/register',authController().postRegister)
+    app.post('/logout',authController().logout)
+    
 
     app.get('/cart', cartController().index)//bd m isko change karenge cart se index ko
     app.post('/update-cart',cartController().update)//this update function is declare in controller.js
