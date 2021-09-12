@@ -5,6 +5,10 @@ import axios from 'axios'
 //import noty which is used to show message like item added to cart
 import Noty from 'noty'
 
+//import admin.js which help in auto refresh of page
+import { initAdmin  } from './admin'
+
+
 //this leads to select every buttons from home page and we can easily 
 //apply event listner on these buttons
 let addToCart = document.querySelectorAll('.add-to-cart')
@@ -46,3 +50,12 @@ addToCart.forEach((btn) => {
      
     })
 })
+
+const alertMsg = document.querySelector('#success-alert')
+if(alertMsg){
+    setTimeout( () => {
+        alertMsg.remove()
+    },2000)
+}
+
+initAdmin()

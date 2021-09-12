@@ -10,6 +10,10 @@ const passport = require('passport')
 
 //factory function use here
 function authController() {
+const _getRedirectUrl = (req) => {
+  return req.user.role === 'admin' ? '/admin/orders' : '/customer/orders'
+}
+
   return {
     //here index is key and that function is value
     //this homecontroller get two value as req and response 
@@ -45,7 +49,7 @@ function authController() {
             return next(err)
           }
           //if everythings okey then reirect to their respective page
-          return res.redirect('/')
+          return res.redirect(_getRedirectUrl(req))
 
         })
         })(req,res,next)//this function is called because passport.authentication return a function

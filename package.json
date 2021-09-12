@@ -23,8 +23,9 @@
     "express-flash": "0.0.2",
     "express-session": "^1.17.1",
     "module-alias": "^2.2.2",
+    "moment": "^2.29.1",
     "mongoose": "^5.11.17",
-    "noty": "^3.2.0-beta-deprecated",
+    "noty": "^3.2.0-beta",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0"
   },
