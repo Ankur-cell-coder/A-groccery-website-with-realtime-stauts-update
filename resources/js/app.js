@@ -1,12 +1,17 @@
 
 //it is imported from node module folder
 import axios from 'axios'
-
 //import noty which is used to show message like item added to cart
 import Noty from 'noty'
 
 //import admin.js which help in auto refresh of page
 import { initAdmin  } from './admin'
+
+import moment from 'moment'
+
+
+
+
 
 
 //this leads to select every buttons from home page and we can easily 
@@ -58,4 +63,76 @@ if(alertMsg){
     },2000)
 }
 
-initAdmin()
+
+
+
+
+//change order status
+let statuses = document.querySelectorAll('.status_line')
+let hiddenInput = document.querySelector('#hiddenInput')
+let order = hiddenInput ? hiddenInput.value : null
+// console.log(order)
+order = JSON.parse(order)
+let time = document.createElement('small')
+
+
+function updateStatus(order) {  //here we receive those order which we get from single order page
+    statuses.forEach( (status) => {  //whenever status get updated previous all removed and new setup apply
+        status.classList.remove('step-completed')
+        status.classList.remove('current')
+    })
+
+    let stepCompleted = true;
+    //here we run a loop on every status and get their status from single oreder.ejs and update according to them
+    statuses.forEach((status) => {
+        let dataProp = status.dataset.status
+        if(stepCompleted){
+            status.classList.add('step-completed')
+        }
+        if(dataProp === order.status) {
+            stepCompleted = false;
+            time.innerText = moment(order.updatedAt).format('hh:mm A')
+            status.appendChild(time)
+            if(status.nextElementSibling){
+            status.nextElementSibling.classList.add('current')
+            }
+        }
+    })
+}
+
+updateStatus(order);
+
+//socket client site work here
+let socket = io()
+
+
+//join
+if(order){
+socket.emit('join',`order_${order._id}`)
+}
+
+//check whether page is in adminmode or user
+
+let adminAreaPath = window.location.pathname
+//console.log(adminAreaPath)
+if(adminAreaPath.includes('admin')) {
+    initAdmin(socket)
+    socket.emit('join','adminRoom')
+}
+
+//listing event from server.js i.e: - order updated
+socket.on('orderUpdated', (data) => {
+    const updatedOrder = { ...order } //copying order into updatedoreder
+    updatedOrder.updatedAt = moment().format()
+    updatedOrder.status = data.status
+    updateStatus(updatedOrder) //this update status function update status
+    new Noty({
+        type: 'success',//this leads to green color
+        timeout: 1000,
+        text: 'Order updated',
+        progressBar: false,
+      }).show();
+})
+
+
+

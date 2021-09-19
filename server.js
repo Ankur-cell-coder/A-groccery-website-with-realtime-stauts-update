@@ -24,6 +24,9 @@ const MongoDbStore = require('connect-mongo')(session)
 //importing passport which use for login
 const passport = require('passport')
 
+//event emitter
+const Emitter = require('events')
+
 //databse connection
 //everytime same code if used for databse connection
 
@@ -42,6 +45,11 @@ let mongoStore = new MongoDbStore({
     mongooseConnection: connection,
     collection: 'sessions'//in which table value should be stored
 })
+
+//event emitter
+const eventEmitter = new Emitter()
+app.set('eventEmitter',eventEmitter)//here we bind this eventemitter
+                                //with app now we can use it anywhere
 
 
 //configuration for session
@@ -100,6 +108,36 @@ require('./routes/web')(app)
 
 
 
-app.listen(PORT, () => {
+//this is our server and we pass this server to socket.io
+const server = app.listen(PORT, () => {
     console.log(`Listening on Port ${PORT}`)
+})
+
+
+//socket
+
+//import socket.io
+// require('socket')  :- this is a function to call this function we pass server
+const io = require('socket.io')(server)
+
+io.on('connection', (socket) => {
+    //join
+    //now we recive data which we emit from client or app.js
+    socket.on('join',(orderId) => {
+       socket.join(orderId)
+    })
+
+})
+
+//listing on eventemitter on orderget updated
+
+eventEmitter.on('orderUpdated',(data) => {
+    //inside to pass complete id of that private house
+    io.to(`order_${data.id}`).emit('orderUpdated', data)
+    //and now we have to lisent this event on client
+})
+
+//listing new order
+eventEmitter.on('orderPlaced', (data) => {
+    io.to('adminRoom').emit('orderPlaced',data)
 })

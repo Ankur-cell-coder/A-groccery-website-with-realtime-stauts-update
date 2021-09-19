@@ -1,27 +1,25 @@
 import axios from 'axios'
 import moment from 'moment'
+import Noty from 'noty'
 
+export function initAdmin(socket) {
+    const orderTableBody = document.querySelector('#orderTableBody')
+    let orders = []
+    let markup
 
-
-export function initAdmin() {
-     const orderTableBody = document.querySelector('#orderTableBody')
-     let orders = []
-     let markup
-
-     axios.get('/admin/orders',{
-         headers: {
-             "X-Requested-With":"XMLHttpRequest"
-         }
-     }).then(res => {
+    axios.get('/admin/orders', {
+        headers: {
+            "X-Requested-With": "XMLHttpRequest"
+        }
+    }).then(res => {
         orders = res.data
         markup = generateMarkup(orders)
         orderTableBody.innerHTML = markup
-    }).catch(err =>{
+    }).catch(err => {
         console.log(err)
     })
 
-
-     function renderItems(items) {
+    function renderItems(items) {
         let parsedItems = Object.values(items)
         return parsedItems.map((menuItem) => {
             return `
@@ -30,8 +28,8 @@ export function initAdmin() {
         }).join('')
       }
 
-     function generateMarkup(orders){
-        return orders.map(order => { //this map function gives an array 
+    function generateMarkup(orders) {
+        return orders.map(order => {  //this map function gives an array 
             return `
                 <tr>
                 <td class="border px-4 py-2 text-green-900">
@@ -47,7 +45,7 @@ export function initAdmin() {
                             <select name="status" onchange="this.form.submit()"
                                 class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                                 <option value="order_placed"
-                                    ${ order.status === 'order placed' ? 'selected' : '' }>
+                                    ${ order.status === 'order_placed' ? 'selected' : '' }>
                                     Placed</option>
                                 <option value="confirmed" ${ order.status === 'confirmed' ? 'selected' : '' }>
                                     Confirmed</option>
@@ -74,12 +72,26 @@ export function initAdmin() {
                 <td class="border px-4 py-2">
                     ${ moment(order.createdAt).format('hh:mm A') }
                 </td>
+            
             </tr>
         `
         }).join('') //here we join all tr array
-     }
+    }
+    // Socket
+    socket.on('orderPlaced', (order) => {
+        new Noty({
+            type: 'success',
+            timeout: 1000,
+            text: 'New order!',
+            progressBar: false,
+        }).show();
+            //add new items to starting of our order array
+        orders.unshift(order)
+        //after that clear whole table
+        orderTableBody.innerHTML = ''
+         //pass new order array 
+        orderTableBody.innerHTML = generateMarkup(orders)
+    })
 }
 
-
 //from here we exports and imports in app.js
-// module.exports = initAdmin
