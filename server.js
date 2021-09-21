@@ -30,9 +30,10 @@ const Emitter = require('events')
 //databse connection
 //everytime same code if used for databse connection
 
-const url = 'mongodb://localhost/realtime';//here realtime is name of databse
-
-mongoose.connect(url, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: true });
+//move this to .env file
+//const url = 'mongodb://localhost/realtime';//here realtime is name of databse
+//and in place of url we use process.env.MONGO_CONNECTION_URL
+mongoose.connect(process.env.MONGO_CONNECTION_URL, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: true });
 const connection = mongoose.connection;
 connection.once('open', () => {   //event listner type
     console.log('Database connected...');
@@ -105,7 +106,10 @@ app.set('view engine', 'ejs')
 //whenever a function call it get executed
 //and operation related to that start their performance
 require('./routes/web')(app)
-
+app.use((req,res) => {
+    res.status(404).render('errors/404')
+   // res.status(404).send('<h1>404, Page not found</h1>')
+})
 
 
 //this is our server and we pass this server to socket.io
