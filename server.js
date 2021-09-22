@@ -118,7 +118,6 @@ const server = app.listen(PORT, () => {
 })
 
 
-//socket
 
 //import socket.io
 // require('socket')  :- this is a function to call this function we pass server
