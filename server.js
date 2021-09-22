@@ -40,7 +40,7 @@ connection.once('open', () => {   //event listner type
 }).catch(err => {//if database not connected and it catch some error
     console.log('Connection failed...')
 });
-
+//
 //Session store
 let mongoStore = new MongoDbStore({
     mongooseConnection: connection,
