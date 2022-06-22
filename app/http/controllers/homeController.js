@@ -28,6 +28,11 @@ function homeController() {
            const pizzas = await Menu.find()
            return res.render('home',{ pizzas:pizzas})
          
+      },
+      async search(req,res) {
+        console.log(req);
+        // const pizzas = await Menu.find()
+        //  res.render('search')
       }
       
     }

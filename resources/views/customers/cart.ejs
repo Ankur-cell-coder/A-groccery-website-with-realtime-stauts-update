@@ -31,6 +31,7 @@
 
         <!-- if user login then show this section otherwise login to continue; -->
         <% if(user) { %>
+            
             <div>
                 <form action="/orders" method="POST" class="mt-12">
                     <input name="phone" class="border border-gray-400 p-2 w-1/2 mb-4 mt-4" type="text" placeholder="Phone number">
