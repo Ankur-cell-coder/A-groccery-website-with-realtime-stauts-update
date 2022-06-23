@@ -37,7 +37,7 @@ function initRoutes(app) {//now we can call app.()
     app.post('/logout', authController().logout)
     app.get('/cart', cartController().index)//bd m isko change karenge cart se index ko
     app.post('/update-cart', cartController().update)//this update function is declare in controller.js
-    app.post('/search',homeController().search)
+    app.post('/',homeController().search)
     //customer routes
     //in below function auth is used because these are only ascessed by login user
     app.post('/orders',auth, orderController().store)

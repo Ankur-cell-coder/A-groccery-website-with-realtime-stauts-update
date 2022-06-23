@@ -30,9 +30,17 @@ function homeController() {
          
       },
       async search(req,res) {
-        console.log(req);
-        // const pizzas = await Menu.find()
-        //  res.render('search')
+        console.log(req.body.item_name);
+         
+         if(req.body.item_name){
+         var pizzas = await Menu.find({name:req.body.item_name})
+         }
+         else
+         {
+          var pizzas= await Menu.find();
+         }
+      
+       return res.render('home',{ pizzas:pizzas});
       }
       
     }
