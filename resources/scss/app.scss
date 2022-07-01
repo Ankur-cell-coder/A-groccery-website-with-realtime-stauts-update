@@ -7,7 +7,7 @@
 body{
     font-family: 'Lato',sans-serif;
     -webkit-font-smoothing: antialiased;
-    color: $dark;
+    color: black;
   //  height: 4000px;//this is for that scroll
 
 }
@@ -19,6 +19,10 @@ nav li:last-child a {
     &:hover{
         background:$primary-hover;
     }
+}
+
+.logo_image{
+    width: 60px;
 }
 
 //hover effect using scss we can also use this by css

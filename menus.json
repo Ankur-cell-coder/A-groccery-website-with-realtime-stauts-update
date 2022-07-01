@@ -4,46 +4,40 @@
     },
     "name": "Angel Food Cake",
     "image": "cake1.png",
-    "price": "250",
-    "size": "small"
+    "price": "250"
   },{
     "_id": {
       "$oid": "5eee6671a27a66807cf2bea3"
     },
     "name": "Black Forest ",
     "image": "cake2.png",
-    "price": "600",
-    "size": "medium"
+    "price": "600"
   },{
     "_id": {
       "$oid": "5eee6692a27a66807cf2bea4"
     },
     "name": "Brownie",
     "image": "cake3.png",
-    "price": "200",
-    "size": "small"
+    "price": "200"
   },{
     "_id": {
       "$oid": "5eee66a5a27a66807cf2bea5"
     },
     "name": "Charlotte",
     "image": "cake4.png",
-    "price": "600",
-    "size": "large"
+    "price": "600"
   },{
     "_id": {
       "$oid": "5eee66c4a27a66807cf2bea6"
     },
     "name": "Cheesecake",
     "image": "cake5.png",
-    "price": "750",
-    "size": "medium"
+    "price": "750"
   },{
     "_id": {
       "$oid": "5eee66cfa27a66807cf2bea7"
     },
     "name": "Chocolate Cake",
     "image": "cake6.png",
-    "price": "200",
-    "size": "small"
+    "price": "200"
   }]

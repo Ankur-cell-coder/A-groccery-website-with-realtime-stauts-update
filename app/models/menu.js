@@ -10,8 +10,7 @@ const Schema = mongoose.Schema //this either be a class or constructor function
 const menuSchema = new Schema({
     name:{type: String, required:true},//this is also a class
     image:{type: String, required:true},
-    price:{type: Number, required:true},
-    size:{type: String, required:true},
+    price:{type: Number, required:true}
 })  //this whole schema got stored inside menuSchema
 
 //explain in notes

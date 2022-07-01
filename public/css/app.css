@@ -300,15 +300,19 @@
 body {
   font-family: "Lato", sans-serif;
   -webkit-font-smoothing: antialiased;
-  color: #ccc;
+  color: black;
 }
 
 nav li:last-child a {
-  background: #FE5F1E;
+  background: #09dd09;
 }
 
 nav li:last-child a:hover {
   background: #b23301;
+}
+
+.logo_image {
+  width: 60px;
 }
 
 nav li a {
@@ -316,7 +320,7 @@ nav li a {
 }
 
 nav li a:hover {
-  color: #FE5F1E;
+  color: #09dd09;
 }
 
 section.hero {
@@ -328,13 +332,13 @@ section.hero {
 }
 
 .add-to-cart {
-  border: 2px solid #FE5F1E;
-  color: #FE5F1E;
+  border: 2px solid #09dd09;
+  color: #09dd09;
   transition: all 0.3s ease-in-out;
 }
 
 .add-to-cart:hover {
-  background: #FE5F1E;
+  background: #09dd09;
   border-color: #fff;
   color: #fff;
 }
@@ -344,7 +348,7 @@ section.hero {
 }
 
 .btn-primary {
-  background: #FE5F1E;
+  background: #09dd09;
   transition: all 0.3s ease-in-out;
 }
 
@@ -357,7 +361,7 @@ section.cart {
 }
 
 section.cart .amount {
-  color: #FE5F1E;
+  color: #09dd09;
 }
 
 section.login {
@@ -366,7 +370,7 @@ section.login {
 }
 
 section.login a {
-  color: #FE5F1E;
+  color: #09dd09;
 }
 
 section.login a:hover {
@@ -380,7 +384,7 @@ section.login a:hover {
 }
 
 a.link {
-  color: #FE5F1E;
+  color: #09dd09;
 }
 
 section.status {
@@ -478,11 +482,11 @@ section.status {
 }
 
 .status-box ul li.current span {
-  color: #FE5F1E;
+  color: #09dd09;
 }
 
 .status-box ul li.current span:after {
-  background: #FE5F1E;
+  background: #09dd09;
 }
 
 .status-box ul li small {
