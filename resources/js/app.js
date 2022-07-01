@@ -9,11 +9,6 @@ import { initAdmin  } from './admin'
 
 import moment from 'moment'
 
-
-
-
-
-
 //this leads to select every buttons from home page and we can easily 
 //apply event listner on these buttons
 let addToCart = document.querySelectorAll('.add-to-cart')
