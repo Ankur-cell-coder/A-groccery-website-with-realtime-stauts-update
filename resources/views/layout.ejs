@@ -22,11 +22,12 @@
         <div>
             <ul class="flex items-center">
                 <li class="ml-6"><a href="/">Menu</a></li>
-                <li class="ml-6"><a href="#">Offers</a></li>
+                <!-- <li class="ml-6"><a href="#">Offers</a></li> -->
                 <% if(user) { %>   
                     <!-- if user is already login then does not show login option  -->
                 <% if(user.role=="admin") { %>
                 <li class="ml-6"><a href="/admin/orders">Orders</a></li>
+                <li class="ml-6"><a href="/addcakes">Add Item</a></li>
                 <% } else { %> 
                  <li class="ml-6"><a href="/customer/orders">Order Status</a></li>
                 <% } %>

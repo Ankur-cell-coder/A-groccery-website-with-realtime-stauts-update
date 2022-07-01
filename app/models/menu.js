@@ -18,5 +18,4 @@ const menuSchema = new Schema({
 const Menu = mongoose.model('Menu',menuSchema)
 //finally we have to export this modules
 //so that inside controllers this should be imported and we can run our databse query
-
 module.exports = Menu

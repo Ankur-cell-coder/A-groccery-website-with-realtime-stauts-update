@@ -14,6 +14,17 @@ const orderController = require('../app/http/controllers/customers/orderControll
 
 const adminOrderController = require('../app/http/controllers/admin/orderController')
 const statusController = require('../app/http/controllers/admin/statusController')
+const addController = require('../app/http/controllers/admin/addController');
+const multer = require('multer');
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'public/img/')
+    },
+    filename: function (req, file, cb) {
+      cb(null, Date.now() + '.png') 
+    }
+})
+const upload = multer({storage:storage});
 
 //middleware
 const guest = require('../app/http/middleware/guest')
@@ -44,6 +55,12 @@ function initRoutes(app) {//now we can call app.()
     app.get('/customer/orders',auth,orderController().index)
     app.get('/customer/orders/:id',auth,orderController().show)//here :id denotes this is dynamic
     
+
+    app.get('/addcakes',admin, addController().index);
+
+    app.post('/addcakes',admin, upload.single('image'), addController().addCake);
+
+    app.post('/deletecake',admin,addController().deleteCake);
    
      //Admin routes
     app.get('/admin/orders',admin,adminOrderController().index)

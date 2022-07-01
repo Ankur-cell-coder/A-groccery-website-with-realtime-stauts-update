@@ -12,7 +12,7 @@ const path = require('path')
 
 const expressLayout = require('express-ejs-layouts')
 
-const PORT = process.env.PORT || 3000
+const PORT = 4000
 const mongoose = require('mongoose')
 
 //this session store all our cart information
